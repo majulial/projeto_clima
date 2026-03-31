@@ -1,0 +1,319 @@
+/* Reset básico para remover margens e padding padrão do navegador */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Variáveis do tema claro */
+:root {
+  --background-gradient: linear-gradient(to bottom, #74b6d2, #b7d7e5);
+  --card-background: #efefef;
+  --title-color: #2f5d8f;
+  --input-background: #dddddd;
+  --input-text: #4a5565;
+  --button-background: #4d8fe5;
+  --button-hover: #3d7cd0;
+  --error-background: #f3d6d6;
+  --error-text: #b94a5a;
+  --weather-box-background: #cfe3ec;
+  --main-text: #2f5d8f;
+  --secondary-text: #4a5565;
+  --date-text: #667085;
+  --shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+/* No modo noturno, apenas o fundo muda, como no modelo que você passou */
+body.dark {
+  --background-gradient: linear-gradient(to bottom, #11182f, #1b2550);
+}
+
+/* Corpo da página centralizado */
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--background-gradient);
+  padding: 20px;
+}
+
+/* Área principal */
+.app {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Card central */
+.card {
+  width: 100%;
+  max-width: 560px;
+  background: var(--card-background);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+/* Todas as telas começam escondidas */
+.screen {
+  display: none;
+}
+
+/* A tela ativa aparece */
+.screen.active {
+  display: block;
+}
+
+/* Classe utilitária para esconder elementos */
+.hidden {
+  display: none !important;
+}
+
+/* Título principal */
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--title-color);
+  margin-bottom: 32px;
+}
+
+/* Área do input + botão */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Campo de digitação */
+.search-input {
+  flex: 1;
+  height: 64px;
+  border: none;
+  outline: none;
+  border-radius: 14px;
+  padding: 0 20px;
+  background: var(--input-background);
+  color: var(--input-text);
+  font-size: 1.35rem;
+}
+
+/* Placeholder do input */
+.search-input::placeholder {
+  color: #7b8794;
+}
+
+/* Botão Buscar */
+.search-button {
+  min-width: 130px;
+  height: 64px;
+  border: none;
+  border-radius: 14px;
+  background: var(--button-background);
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+/* Efeito hover do botão */
+.search-button:hover {
+  background: var(--button-hover);
+}
+
+/* Caixa da mensagem de erro */
+.error-message {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 12px;
+  background: var(--error-background);
+  color: var(--error-text);
+  font-size: 1.15rem;
+  text-align: left;
+}
+
+/* Caixa com ícone + temperatura */
+.weather-box {
+  background: var(--weather-box-background);
+  border-radius: 18px;
+  padding: 28px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+/* Ícone SVG do clima */
+.weather-icon {
+    font-size: 88px;
+  color: #5f7f98;
+  line-height: 1;
+}
+
+/* Temperatura */
+.temperature {
+  font-size: 5rem;
+  font-weight: 700;
+  color: #1f2f46;
+}
+
+/* Nome da cidade */
+.city-name {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--main-text);
+  margin-bottom: 14px;
+}
+
+/* Descrição do clima */
+.weather-description {
+  font-size: 1.35rem;
+  color: var(--secondary-text);
+  margin-bottom: 10px;
+}
+
+/* Data */
+.weather-date {
+  font-size: 1rem;
+  color: var(--date-text);
+}
+
+/* Botão com ícone de casa */
+.home-button {
+  width: 68px;
+  height: 68px;
+  margin-top: 28px;
+  border: none;
+  border-radius: 14px;
+  background: var(--button-background);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+/* Hover do botão de voltar */
+.home-button:hover {
+  background: var(--button-hover);
+}
+
+/* Tamanho do SVG dentro do botão */
+.home-button img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* Mensagem de carregamento */
+.loading-message {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 12px;
+  background: #d9eaf7;
+  color: #2f5d8f;
+  font-size: 1.1rem;
+  text-align: left;
+}
+
+/* TABLET */
+@media (max-width: 768px) {
+  .card {
+    max-width: 460px;
+    padding: 30px;
+  }
+
+  .title {
+    font-size: 2.4rem;
+    margin-bottom: 28px;
+  }
+
+  .search-input,
+  .search-button {
+    height: 58px;
+    font-size: 1.1rem;
+  }
+
+  .weather-icon {
+    font-size: 72px;
+  }
+
+  .temperature {
+    font-size: 4rem;
+  }
+
+  .city-name {
+    font-size: 1.7rem;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  body {
+    padding: 16px;
+  }
+
+  .card {
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+
+  .title {
+    font-size: 2rem;
+    margin-bottom: 24px;
+  }
+
+  /* No mobile, input e botão ficam um embaixo do outro */
+  .search-box {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .search-input,
+  .search-button {
+    width: 100%;
+    height: 54px;
+    font-size: 1rem;
+  }
+
+  /* Na tela de resultado, ícone e temperatura ficam empilhados */
+  .weather-box {
+    flex-direction: column;
+    gap: 14px;
+    padding: 24px 18px;
+  }
+
+  .weather-icon {
+    font-size: 64px;
+  }
+
+  .temperature {
+    font-size: 3.5rem;
+  }
+
+  .city-name {
+    font-size: 1.5rem;
+  }
+
+  .weather-description {
+    font-size: 1.1rem;
+  }
+
+  .weather-date {
+    font-size: 0.95rem;
+  }
+
+  .home-button {
+    width: 60px;
+    height: 60px;
+  }
+
+  .home-button img {
+    width: 24px;
+    height: 24px;
+  }
+}
