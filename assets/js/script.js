@@ -19,8 +19,12 @@ const iconeClima = document.getElementById("icone-clima");
 
 const mensagemCarregando = document.getElementById("mensagem-carregando");
 
+//const { buscarCoordenadas, buscarClimaAtual } = window.weatherApi;
 
+/* PARA ATIVAR OS TESTES BASTA TIRAR O COMENTÁRIO DA CONST ACIMA E COMENTAR AS FUNÇÕES DE BUSCAR COORDENADAS E CLIMA ATUAL ABAIXO, DEIXANSO APENAS A CONST COM O MOCK DA API. ASSIM, O JEST VAI USAR O MOCK E NÃO AS FUNÇÕES REAIS, EVITANDO ERROS DE REDE DURANTE OS TESTES. */
 /* =========================
+
+
    MODO NOTURNO AUTOMÁTICO
    ========================= */
 
@@ -235,7 +239,7 @@ async function buscarClimaAtual(latitude, longitude) {
 
   return dados.current;
 }
-
+/* ========================= */
 
 /* Exibe a mensagem de carregamento */
 function mostrarCarregando() {
@@ -326,7 +330,7 @@ botaoBuscar.addEventListener("click", async () => {
   } catch (erro) {
     console.error("Erro ao buscar clima:", erro);
     esconderCarregando();
-    mostrarErro();
+    mostrarErro(erro.message);
   }
 });
 
@@ -352,6 +356,27 @@ inputCidade.addEventListener("keydown", (event) => {
   }
 });
 
+/* =========================
+   TESTE NO JEST
+   ========================= */
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    aplicarModoNoturnoAutomatico,
+    mostrarTelaInicial,
+    mostrarTelaResultado,
+    mostrarErro,
+    esconderErro,
+    mostrarCarregando,
+    esconderCarregando,
+    formatarDataAtual,
+    formatarNomeDaCidade,
+    atualizarClasseDoIcone,
+    obterDescricaoDoClima,
+    definirIconePorClima,
+    preencherResultadoComDados
+  };
+}
 
 /* =========================
    INICIALIZAÇÃO
