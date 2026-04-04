@@ -116,6 +116,9 @@ projeto_clima/
 ├── style.css
 ├── package.json
 └── README.md
+```
+
+
 
 ## ⚙️ Como executar o projeto
 
