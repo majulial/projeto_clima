@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Previsão do Tempo</title>
+  <link rel="icon" href="./assets/images/favicon.svg">
+
+   <!-- Biblioteca Weather Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css">
+
+    <!-- Google Fonts: Poppins -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+   <!-- CSS -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+
+</head>
+<body>
+
+
+
+  <main class="app">
+    <section class="card">
+
+      <!-- TELA INICIAL -->
+      <section id="tela-inicial" class="screen active">
+        <h1 class="title">Previsão do Tempo</h1>
+
+        <div class="search-box">
+          <!-- Campo onde o usuário digita o nome da cidade -->
+          <input
+            type="text"
+            id="cidade"
+            class="search-input"
+            placeholder="Digite o nome da cidade"
+          >
+
+          <!-- Botão para iniciar a busca -->
+          <button id="buscar" class="search-button">Buscar</button>
+        </div>
+
+          <!-- Mensagem de carregamento -->
+        <div id="mensagem-carregando" class="loading-message hidden">
+    Buscando informações...
+      </div>
+
+        <!-- Mensagem de erro: começa escondida -->
+        <div id="mensagem-erro" class="error-message hidden">
+          Cidade não encontrada. Tente novamente.
+        </div>
+      </section>
+
+      <!-- TELA DE RESULTADO -->
+      <section id="tela-resultado" class="screen hidden">
+        <div class="weather-box">
+          <!-- Ícone SVG do clima -->
+         <!-- Ícone do clima usando Weather Icons -->
+            <i id="icone-clima" class="weather-icon wi wi-day-cloudy" aria-hidden="true"></i>
+
+          <!-- Temperatura -->
+          <h2 id="temperatura" class="temperature">21°</h2>
+        </div>
+
+        <!-- Nome da cidade -->
+        <h3 id="cidade-resultado" class="city-name">São Paulo, Brasil</h3>
+
+        <!-- Descrição do clima -->
+        <p id="descricao-clima" class="weather-description">Nublado</p>
+
+        <!-- Data atual -->
+        <p id="data-atual" class="weather-date">segunda-feira, 13 de outubro de 2025</p>
+
+        <!-- Botão de voltar para a tela inicial -->
+        <button id="voltar" class="home-button" aria-label="Voltar para a busca">
+          <img src="./assets/images/home.svg" alt="Voltar">
+        </button>
+      </section>
+
+    </section>
+  </main>
+
+  <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/api.js"></script>
+</body>
+</html>
