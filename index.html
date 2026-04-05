@@ -11,10 +11,7 @@
 
     <!-- Google Fonts: Poppins -->
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
 
    <!-- CSS -->
   <link rel="stylesheet" href="./assets/css/style.css">
@@ -24,13 +21,25 @@
 <body>
 
 
+<div id="clima-bg" class="clima-bg"></div>
 
   <main class="app">
     <section class="card">
 
       <!-- TELA INICIAL -->
       <section id="tela-inicial" class="screen active">
-        <h1 class="title">Previsão do Tempo</h1>
+
+        
+
+        <div class="logo">
+          <div class="olho-elegante">
+  <div class="iris"></div>
+</div>
+  <!-- <div class="soll"></div>
+  <div class="linha"></div>
+  <div class="linha pequena"></div> -->
+</div>
+        <h1 class="title">Olho no tempo.</h1>
 
         <div class="search-box">
           <!-- Campo onde o usuário digita o nome da cidade -->
@@ -41,19 +50,25 @@
             placeholder="Digite o nome da cidade"
           >
 
+            <!-- Mensagem de erro: começa escondida -->
+        <div id="mensagem-erro" class="error-message hidden">
+          Cidade não encontrada. Tente novamente.
+        </div>
+
+
+             <!-- Mensagem de carregamento -->
+        <div id="mensagem-carregando" class="loading-message hidden">
+    Buscando informações...
+      </div>
+      
+
           <!-- Botão para iniciar a busca -->
           <button id="buscar" class="search-button">Buscar</button>
         </div>
 
-          <!-- Mensagem de carregamento -->
-        <div id="mensagem-carregando" class="loading-message hidden">
-    Buscando informações...
-      </div>
+       
 
-        <!-- Mensagem de erro: começa escondida -->
-        <div id="mensagem-erro" class="error-message hidden">
-          Cidade não encontrada. Tente novamente.
-        </div>
+      
       </section>
 
       <!-- TELA DE RESULTADO -->
@@ -76,6 +91,48 @@
         <!-- Data atual -->
         <p id="data-atual" class="weather-date">segunda-feira, 13 de outubro de 2025</p>
 
+        <!-- Card com temperatura máxima e mínima do dia -->
+<div class="temp-range-card">
+  <div class="temp-range-item">
+    <p class="temp-range-label">Máxima</p>
+    <p id="temperatura-max" class="temp-range-value">--°</p>
+  </div>
+
+  <div class="temp-range-divider"></div>
+
+  <div class="temp-range-item">
+    <p class="temp-range-label">Mínima</p>
+    <p id="temperatura-min" class="temp-range-value">--°</p>
+  </div>
+</div>
+
+
+          <!-- Área com informações complementares do clima -->
+   <div class="weather-details">
+
+    <!-- Card da umidade -->
+    <div class="detail-card">
+      <i class="wi wi-humidity detail-icon"></i>
+      <p class="detail-label">Umidade</p>
+      <p id="umidade" class="detail-value">--%</p>
+    </div>
+
+    <!-- Card da velocidade do vento -->
+    <div class="detail-card">
+      <i class="wi wi-strong-wind detail-icon"></i>
+      <p class="detail-label">Vento</p>
+      <p id="vento" class="detail-value">-- km/h</p>
+    </div>
+
+    <!-- Card da sensação térmica -->
+    <div class="detail-card">
+      <i class="wi wi-thermometer detail-icon"></i>
+      <p class="detail-label">Sensação</p>
+      <p id="sensacao" class="detail-value">--°</p>
+    </div>
+
+  </div>
+
         <!-- Botão de voltar para a tela inicial -->
         <button id="voltar" class="home-button" aria-label="Voltar para a busca">
           <img src="./assets/images/home.svg" alt="Voltar">
@@ -86,6 +143,6 @@
   </main>
 
   <script src="./assets/js/script.js"></script>
-  <script src="./assets/js/api.js"></script>
+
 </body>
 </html>
