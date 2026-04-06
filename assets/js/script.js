@@ -684,6 +684,96 @@ if (typeof module !== "undefined" && module.exports) {
   };
 }
 
+inputCidade.addEventListener("input", () => {
+  //console.log("digitando...");
+
+  const textoDigitado = inputCidade.value.trim();
+
+  clearTimeout(autocompleteTimeout);
+
+  if (textoDigitado.length < 2) {
+    autocompleteList.classList.add("hidden");
+    autocompleteList.innerHTML = "";
+    return;
+  }
+
+  autocompleteTimeout = setTimeout(async () => {
+    try {
+      const sugestoes = await buscarSugestoesDeCidade(textoDigitado);
+      mostrarSugestoes(sugestoes);
+    } catch (erro) {
+      console.error("Erro no autocomplete:", erro);
+      autocompleteList.innerHTML = "";
+      autocompleteList.classList.add("hidden");
+    }
+  }, 300);
+});
+
+/* =========================
+   MOSTRAR SUGESTÕES NA TELA
+   ========================= */
+
+/*
+  Recebe uma lista de cidades e monta os itens
+  dentro da caixa do autocomplete.
+*/
+function mostrarSugestoes(sugestoes) {
+  /*
+    Antes de inserir novos itens,
+    limpamos a lista antiga para não acumular sugestões.
+  */
+  autocompleteList.innerHTML = "";
+
+  /*
+    Se não houver sugestões, escondemos a lista
+    e encerramos a função.
+  */
+  if (!sugestoes || sugestoes.length === 0) {
+    autocompleteList.classList.add("hidden");
+    return;
+  }
+
+  /*
+    Para cada cidade encontrada, criamos um item visual.
+  */
+  sugestoes.forEach((cidade) => {
+    /* Cria o elemento principal de cada sugestão */
+    const item = document.createElement("div");
+    item.classList.add("autocomplete-item");
+
+    /*
+      Monta o texto secundário com estado/região e país.
+      Exemplo:
+      Rio de Janeiro
+      Rio de Janeiro, Brasil
+    */
+    const detalhes = [cidade.admin1, cidade.country]
+      .filter(Boolean)
+      .join(", ");
+
+    /*
+      Preenche o conteúdo do item.
+      Usamos innerHTML aqui apenas para montar estrutura fixa,
+      com dados vindos da API em contexto controlado.
+      Se preferir depois, podemos trocar para createElement/textContent.
+    */
+    item.innerHTML = `
+      ${cidade.name}
+      <small>${detalhes}</small>
+    `;
+
+    /*
+      Adiciona o item na lista.
+    */
+    autocompleteList.appendChild(item);
+  });
+
+  /*
+    Depois de montar os itens, mostramos a caixa.
+  */
+  autocompleteList.classList.remove("hidden");
+}
+
 
 /**
  * Inicializa a aplicação com o tema noturno automático,
@@ -703,3 +793,16 @@ function inicializarAplicacao() {
   criarEstrelaCadente(); // Para mostrar uma estrela cadente logo no início, dando vida ao fundo noturno
 
 inicializarAplicacao();
+
+
+/* =========================
+   FOOTER ANIMATION
+   ========================= */
+
+window.addEventListener("load", () => {
+  const footer = document.getElementById("appFooter");
+
+  setTimeout(() => {
+    footer.classList.add("show");
+  }, 1200); // aparece depois de 1.2s
+});

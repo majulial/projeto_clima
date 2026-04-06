@@ -40,6 +40,7 @@
   <div class="linha pequena"></div> -->
 </div>
         <h1 class="title">Olho no tempo.</h1>
+          <p class="subtitle">Descubra a previsão do tempo para sua cidade.</p>
 
         <div class="search-box">
           <!-- Campo onde o usuário digita o nome da cidade -->
@@ -48,7 +49,10 @@
             id="cidade"
             class="search-input"
             placeholder="Digite o nome da cidade"
+            autocomplete="off"
           >
+          <!-- Lista de sugestões do autocomplete -->
+  <div id="autocomplete-list" class="autocomplete-list hidden"></div>
 
             <!-- Mensagem de erro: começa escondida -->
         <div id="mensagem-erro" class="error-message hidden">
@@ -137,12 +141,31 @@
         <button id="voltar" class="home-button" aria-label="Voltar para a busca">
           <img src="./assets/images/home.svg" alt="Voltar">
         </button>
+        
       </section>
 
+      
+
     </section>
+    
+    
   </main>
 
   <script src="./assets/js/script.js"></script>
+  <footer class="app-footer" id="appFooter">
+
+  <p>
+    🔒 Nenhum dado pessoal é armazenado. As buscas são processadas em tempo real.
+  </p>
+
+  <p>
+    🌦️ Dados fornecidos por 
+    <a href="https://open-meteo.com/" target="_blank">
+      Open-Meteo
+    </a>.
+  </p>
+
+</footer>
 
 </body>
 </html>
