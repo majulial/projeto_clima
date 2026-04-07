@@ -40,6 +40,12 @@ const sensacaoElemento = document.getElementById("sensacao");
 const temperaturaMax = document.getElementById("temperatura-max");
 const temperaturaMin = document.getElementById("temperatura-min");
 
+/* AutoComplete */
+
+const autocompleteList = document.getElementById("autocomplete-list");
+let autocompleteTimeout;
+
+
 
 //const { buscarCoordenadas, buscarClimaAtual } = window.weatherApi;
 
@@ -684,9 +690,39 @@ if (typeof module !== "undefined" && module.exports) {
   };
 }
 
-inputCidade.addEventListener("input", () => {
-  //console.log("digitando...");
 
+/* =========================
+   AUTOCOMPLETE
+   ========================= */
+
+async function buscarSugestoesDeCidade(nomeCidade) {
+  if (nomeCidade.trim().length < 2) {
+    return [];
+  }
+
+  const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(nomeCidade)}&count=5&language=pt&format=json`;
+
+  const resposta = await fetch(url);
+
+  if (!resposta.ok) {
+    throw new Error("Erro ao buscar sugestões de cidades.");
+  }
+
+  const dados = await resposta.json();
+
+  if (!dados.results || dados.results.length === 0) {
+    return [];
+  }
+
+  return dados.results;
+}
+
+
+/* =========================
+   EVENTO AUTOCOMPLETE 
+   ========================= */
+   
+  inputCidade.addEventListener("input", () => {
   const textoDigitado = inputCidade.value.trim();
 
   clearTimeout(autocompleteTimeout);
@@ -709,68 +745,44 @@ inputCidade.addEventListener("input", () => {
   }, 300);
 });
 
-/* =========================
-   MOSTRAR SUGESTÕES NA TELA
-   ========================= */
 
-/*
-  Recebe uma lista de cidades e monta os itens
-  dentro da caixa do autocomplete.
-*/
+/* FUNÇÃO SUGESTÕES */
+
 function mostrarSugestoes(sugestoes) {
-  /*
-    Antes de inserir novos itens,
-    limpamos a lista antiga para não acumular sugestões.
-  */
   autocompleteList.innerHTML = "";
 
-  /*
-    Se não houver sugestões, escondemos a lista
-    e encerramos a função.
-  */
   if (!sugestoes || sugestoes.length === 0) {
     autocompleteList.classList.add("hidden");
     return;
   }
 
-  /*
-    Para cada cidade encontrada, criamos um item visual.
-  */
   sugestoes.forEach((cidade) => {
-    /* Cria o elemento principal de cada sugestão */
     const item = document.createElement("div");
     item.classList.add("autocomplete-item");
 
-    /*
-      Monta o texto secundário com estado/região e país.
-      Exemplo:
-      Rio de Janeiro
-      Rio de Janeiro, Brasil
-    */
     const detalhes = [cidade.admin1, cidade.country]
       .filter(Boolean)
       .join(", ");
 
-    /*
-      Preenche o conteúdo do item.
-      Usamos innerHTML aqui apenas para montar estrutura fixa,
-      com dados vindos da API em contexto controlado.
-      Se preferir depois, podemos trocar para createElement/textContent.
-    */
     item.innerHTML = `
       ${cidade.name}
       <small>${detalhes}</small>
     `;
 
-    /*
-      Adiciona o item na lista.
-    */
+     /* 👇 AQUI ESTÁ O NOVO */
+    item.addEventListener("click", () => {
+      inputCidade.value = cidade.name;
+      autocompleteList.innerHTML = "";
+      autocompleteList.classList.add("hidden");
+
+      botaoBuscar,click();A
+    });
+
     autocompleteList.appendChild(item);
   });
 
-  /*
-    Depois de montar os itens, mostramos a caixa.
-  */
+  
+
   autocompleteList.classList.remove("hidden");
 }
 
