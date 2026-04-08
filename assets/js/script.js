@@ -794,7 +794,7 @@ function mostrarSugestoes(sugestoes) {
 function inicializarAplicacao() {
   aplicarModoNoturnoAutomatico();
   mostrarTelaInicial();
-  aplicarAnimacaoDeFundo("nevoa"); // Fundo neutro para o iníci
+  aplicarAnimacaoDeFundo(); // Fundo neutro para o iníci
 }
 
 /* =========================
